@@ -3,7 +3,7 @@
 You only need 3 things installed to run this program straight from VSCode:
 - Visual Studio Code, can be downloaded [here](https://code.visualstudio.com/)
 - The Python extension for Visual Studio Code
-- Install Python [here]([https://www.msys2.org/](https://www.python.org/downloads/))
+- Install Python [here]([https://www.msys2.org/](https://www.python.org/downloads/)
 
 Once your installations are complete, ensure your PATH environment variable includes the downloaded folder with the python executable.
 
