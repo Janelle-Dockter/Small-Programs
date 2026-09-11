@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="Assignment 3.css">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript">
+  if (typeof jQuery == 'undefined') {
+  document.write(unescape("%3Cscript src='../../Shared/jquery-1.11.3.js' type='text/javascript'%3E%3C/script%3E")); }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+       $("#calculate").click( function() {
+        // Flag error to 1 if any of the radio buttons are unclicked, or if too many toppings are selected
+        var error = 0; 
+        
+        // Finds the crust thickness selected by the user
+        var crustValue = $('input:radio[name=crust]:checked').val();
+        var crustPrice = 0;
+        if( crustValue === undefined ) {
+            alert("No value selected for crust thickness");
+            $("#total").html( "Please select a valid value for crust thickness, size, and sauce." );
+            error = 1;
+        }
+        else if( crustValue === "thin" ) {
+            crustPrice += 5;
+        }
+        else if( crustValue === "regular" ) {
+            crustPrice += 7;
+        }
+        else if( crustValue === "deep dish" ) {
+            crustPrice += 10;
+        }
+        else {
+            $("#total").html( "INTERNAL ERROR: We should never execute this line of code!!");
+        }
+           
+        // Finds the size selected by the user
+        var sizeValue = $('input:radio[name=size]:checked').val();
+        var sizePrice = 0;
+        var sizeToppings = 0; // To calculate the cost of toppings: 1 for small, 2 for medium, 3 for large
+        if( sizeValue === undefined ) {
+            alert("No value selected for size");
+            $("#total").html( "Please select a valid value for crust thickness, size, and sauce." );
+            error = 1;
+        }
+        else if( sizeValue === "small" ) {
+            sizePrice += 5;
+            sizeToppings = 1;
+        }
+        else if( sizeValue === "medium" ) {
+            sizePrice += 10;
+            sizeToppings = 2;
+        }
+        else if( sizeValue === "large" ) {
+            sizePrice += 15;
+            sizeToppings = 3;
+        }
+        else {
+            $("#total").html( "INTERNAL ERROR: We should never execute this line of code!!");
+        }
+           
+        // Finds the sauce selected by the user
+        var sauceValue = $('input:radio[name=sauce]:checked').val();
+        if( sauceValue === undefined ) {
+            alert("No value selected for sauce");
+            $("#total").html( "Please select a valid value for crust thickness, size, and sauce." );
+            error = 1;
+        }
+           
+        // Finds the toppings selected by the user
+        var numToppings = 0;
+        var toppingsPrice = 0;
+        if( $('#pepperoni').is(':checked') ) {
+            numToppings += 1;
+        }
+        if( $('#sausage').is(':checked') ) {
+            numToppings += 1;
+        }
+        if( $('#onion').is(':checked') ) {
+            numToppings += 1;
+        }
+        if( $('#garlic').is(':checked') ) {
+            numToppings += 1;
+        }
+        if( $('#greenPepper').is(':checked') ) {
+            numToppings += 1;
+        }
+        if( $('#mushrooms').is(':checked') ) {
+            numToppings += 1;
+        }
+        if( $('#blackOlives').is(':checked') ) {
+            numToppings += 1;
+        }
+       if( numToppings >= 4 ) {
+            alert("Too many toppings selected");
+            $("#total").html( "Please select three or fewer toppings." );
+           error = 1;
+        }
+        toppingsPrice = numToppings * sizeToppings;
+        
+        // Display the total
+        if (error === 0) {
+            var totalPrice = crustPrice + sizePrice + toppingsPrice;
+            var stringPrice = ( totalPrice.toString() + ".00" )
+            alert("Total price of pizza: $" + stringPrice);
+            $("#total").html( "Total due: $" + stringPrice );
+        }
+       });
+    });
+</script>
+</head>
+    
+<body>
+
+<h1> Pizza Order </h1>
+ 
+<form>
+    <!-- Radio button for user to select crust thickness -->
+    <h3 class = "crustPrompt"> Select a crust thickness: </h3>
+    <div>
+        <input type="radio" id="thin" name="crust" value="thin">
+        <label for="thin"> Thin </label>
+        
+        <input type="radio" id="regular" name="crust" value="regular">
+        <label for="regular"> Regular </label>
+        
+        <input type="radio" id="deep dish" name="crust" value="deep dish">
+        <label for="deep dish"> Deep Dish </label>
+    </div>
+
+    <!-- Radio button for user to select size -->
+    <h3 class = "sizePrompt"> Select a size: </h3>
+    <div>
+        <input type="radio" id="small" name="size" value="small">
+        <label for="small"> Small </label>
+        
+        <input type="radio" id="medium" name="size" value="medium">
+        <label for="medium"> Medium </label>
+        
+        <input type="radio" id="large" name="size" value="large">
+        <label for="large"> Large </label>
+    </div>
+
+    <!-- Radio button for user to select sauce -->
+    <h3 class = "saucePrompt"> Select a sauce: </h3>
+    <div>
+        <input type="radio" id="red" name="sauce" value="red">
+        <label for="red"> Red </label>
+        
+        <input type="radio" id="white" name="sauce" value="white">
+        <label for="white"> White </label>
+        
+        <input type="radio" id="green" name="sauce" value="green">
+        <label for="green"> Green </label>
+    </div>
+
+    <!-- Check boxes for user to select toppings -->
+    <h3 class = "toppingPrompt"> Select up to three toppings: </h3>
+    <div>
+        <input type="checkbox" id="pepperoni" name="topings" value="pepperoni">
+        <label for="pepperoni"> Pepperoni </label>
+        
+        <input type="checkbox" id="sausage" name="toppings" value="sausage">
+        <label for="sausage"> Sausage </label>
+        
+        <input type="checkbox" id="onion" name="toppings" value="onion">
+        <label for="onion"> Onion </label>
+        
+        <input type="checkbox" id="garlic" name="toppings" value="garlic">
+        <label for="garlic"> Garlic </label>
+    </div>
+    <div>
+        <input type="checkbox" id="greenPepper" name="toppings" value="green pepper">
+        <label for="greenPepper"> Green Pepper </label>
+        
+        <input type="checkbox" id="mushrooms" name="toppings" value="mushrooms">
+        <label for="mushrooms"> Mushrooms </label>
+        
+        <input type="checkbox" id="blackOlives" name="toppings" value="black olives">
+        <label for="blackOlives"> Black Olives </label>
+    </div>
+
+    <!-- Submit button for user to calculate the total for the pizza -->
+    <input type="button" id="calculate" value="CALCULATE TOTAL">
+
+    <p id="total"> Total due: $0.00 </p>
+    
+</form>
+    
+</body>
