@@ -78,15 +78,13 @@ def getUserChoice():
     
     while not done:
         userChoiceString = input("Rock, Paper, or Scissors? ")
-        if userChoiceString == "Rock" or userChoiceString == "rock":
+        done = True
+        if userChoiceString.lower() == "rock":
             userChoice = ROCK
-            done = True
-        elif userChoiceString == "Paper" or userChoiceString == "paper":
+        elif userChoiceString.lower() == "paper":
             userChoice = PAPER
-            done = True
-        elif userChoiceString == "Scissors" or userChoiceString == "scissors":
+        elif userChoiceString.lower() == "scissors":
             userChoice = SCISSORS
-            done = True
         else:
             print("Error! Please enter a valid option!")
             done = False

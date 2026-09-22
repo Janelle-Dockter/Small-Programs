@@ -14,7 +14,6 @@ def main():
     bestRound = 100
     done = False
     while not done:
-        
         answer = getAnswer()
         thisRound = playRound(answer)
         if thisRound < bestRound:
@@ -54,19 +53,16 @@ def playRound(answer):
     found = False
     while not found:
         guess = getGuesses(low, high)
+        numberOfGuesses += 1
+        found = False
         if guess < answer:
             print("Too low!")
             low = guess + 1
-            numberOfGuesses += 1
-            found = False
         elif guess > answer:
             print("Too high!")
             high = guess - 1
-            numberOfGuesses += 1
-            found = False
         else:
             print("You guessed it!")
-            numberOfGuesses += 1
             found = True
     displayRoundResult(numberOfGuesses)
     return numberOfGuesses
